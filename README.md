@@ -13,7 +13,7 @@
 
 ## Custom Server Implementation:
 - Initial TCP Connection;
-- Extend TCP Connection;
+- Extend TCP Connection logic;
 - Creating HttpRequest and HttpResponse classes;
 - Creating HttpMethod enum and HttpStatusCode enum;
 - Routing mapper creating and routingTable implementation via Dictionary;
