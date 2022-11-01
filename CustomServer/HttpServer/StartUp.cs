@@ -12,7 +12,19 @@ namespace HttpServer
         {
             var server = new Server(
                 router => 
-                    router.MapGet("/", new HtmlResponse("<h1>Simple page for Custom Server</h1><br><h2>Created by Threed</h2>")));
+                    router.MapGet("/", new HtmlResponse("<h1>Simple page for Custom Server</h1><br><h2>Created by Threed</h2>"))
+                    .MapGet("/Cat", request => 
+                    {
+                        if(request.Query != null && request.Query.ContainsKey("name"))
+                        {
+                            return new HtmlResponse($"<h1>Hello, I am {request.Query["name"]} cat.</h1><br><h2>Created by Threed</h2>");
+                        }
+                        else
+                        {
+                            return new HtmlResponse($"<h1>Hello, I am just a random cat!!!</h1><br><h2>Created by Threed</h2>");
+                        }
+                        
+                    }));
 
             await server.StartAsync();
         }

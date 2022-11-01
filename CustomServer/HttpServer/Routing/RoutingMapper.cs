@@ -10,7 +10,7 @@ namespace HttpServer.Routing
 {
     public class RoutingMapper : IRoutingMapper
     {
-        private readonly Dictionary<HttpMethods, Dictionary<string, HttpResponse>> routings;
+        private readonly Dictionary<HttpMethods, Dictionary<string, Func<HttpRequest, HttpResponse>>> routings;
 
         public RoutingMapper()
         {
@@ -23,7 +23,10 @@ namespace HttpServer.Routing
             };
         }
 
-        public IRoutingMapper Map(string uri, HttpMethods method, HttpResponse responce)
+        public IRoutingMapper Map(HttpMethods method, string uri, HttpResponse responce)
+         => this.Map(method, uri, request => responce);
+
+        public IRoutingMapper Map(HttpMethods method, string uri, Func<HttpRequest, HttpResponse> responce)
         {
             this.routings[method][uri] = responce;
 
@@ -31,16 +34,19 @@ namespace HttpServer.Routing
         }
 
         public IRoutingMapper MapGet(string uri, HttpResponse responce)
-        {
-            this.routings[HttpMethods.GET][uri] = responce;
+            => this.MapGet(uri, request => responce);
 
-            return this;
-        }
+        public IRoutingMapper MapGet(string uri, Func<HttpRequest, HttpResponse> func)
+            => this.Map(HttpMethods.GET, uri, func);
+
+        public IRoutingMapper MapPost(string uri, HttpResponse responce)
+            => this.MapPost(uri, request => responce);
+
+        public IRoutingMapper MapPost(string uri, Func<HttpRequest, HttpResponse> func)
+            => this.Map(HttpMethods.POST, uri, func);
 
         public HttpResponse GetResponse(HttpRequest request)
-        {
-            
-            return this.routings[request.Method][request.URI];
-        }
+            => this.routings[request.Method][request.URI](request);
+
     }
 }

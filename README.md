@@ -18,3 +18,7 @@
 - Creating HttpMethod enum and HttpStatusCode enum;
 - Routing mapper creating and routingTable implementation via Dictionary;
 - Extending HttpResponse class as a parent of TextResponse and HtmlResponse;
+- Adding action delegate to the IRoutingMapper for easier configuration of routs;
+- Adding queryString functionality to the HttpRequest;
+- Extending of HttpResponse with request-response func delegate for custom logic implementation of the routing via queryString.
+
