@@ -11,7 +11,7 @@
 - HTTP methods, HTTP version, HTTP URI, HTTP Headers, HTTP Context;
 
 
-## Custom Server Implementation:
+## Custom Server Implementation flow:
 - Initial TCP Connection;
 - Extend TCP Connection logic;
 - Creating HttpRequest and HttpResponse classes;
@@ -21,4 +21,6 @@
 - Adding action delegate to the IRoutingMapper for easier configuration of routs;
 - Adding queryString functionality to the HttpRequest;
 - Extending of HttpResponse with request-response func delegate for custom logic implementation of the routing via queryString.
+- Adding controllers;
+- Creating of extend methods for IRoutingMapper to handle controller with func delegate;
 

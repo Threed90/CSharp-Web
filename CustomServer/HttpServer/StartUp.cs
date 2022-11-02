@@ -1,4 +1,6 @@
-﻿using HttpServer.Responces;
+﻿using HttpServer.Controllers;
+using HttpServer.Extensions;
+using HttpServer.Responces;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
@@ -11,20 +13,9 @@ namespace HttpServer
         static async Task  Main(string[] args)
         {
             var server = new Server(
-                router => 
-                    router.MapGet("/", new HtmlResponse("<h1>Simple page for Custom Server</h1><br><h2>Created by Threed</h2>"))
-                    .MapGet("/Cat", request => 
-                    {
-                        if(request.Query != null && request.Query.ContainsKey("name"))
-                        {
-                            return new HtmlResponse($"<h1>Hello, I am {request.Query["name"]} cat.</h1><br><h2>Created by Threed</h2>");
-                        }
-                        else
-                        {
-                            return new HtmlResponse($"<h1>Hello, I am just a random cat!!!</h1><br><h2>Created by Threed</h2>");
-                        }
-                        
-                    }));
+                router =>
+                    router.MapGet<HomeController>("/", c => c.Index())
+                        .MapGet<CatController>("/Cat", c => c.Index()));
 
             await server.StartAsync();
         }

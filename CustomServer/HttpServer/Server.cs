@@ -21,22 +21,22 @@
         private HttpRequest httpRequest;
         private readonly IRoutingMapper mapper;
 
-        public Server(string ip, int port, Action<IRoutingMapper> mapper)
+        public Server(string ip, int port, Action<IRoutingMapper> mapperAction)
         {
             this.port = port;
             this.address = IPAddress.Parse(ip);
             this.listener = new(this.address, port);
 
-            mapper(this.mapper = new RoutingMapper());
+            mapperAction(this.mapper = new RoutingMapper());
         }
 
-        public Server(int port, Action<IRoutingMapper> mapper)
-            : this("127.0.0.1", port, mapper)
+        public Server(int port, Action<IRoutingMapper> mapperAction)
+            : this("127.0.0.1", port, mapperAction)
         {
 
         }
-        public Server(Action<IRoutingMapper> mapper)
-            : this("127.0.0.1", 9090, mapper)
+        public Server(Action<IRoutingMapper> mapperAction)
+            : this("127.0.0.1", 9090, mapperAction)
         {
 
         }
