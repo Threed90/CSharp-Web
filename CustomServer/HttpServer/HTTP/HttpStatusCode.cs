@@ -9,6 +9,6 @@ namespace HttpServer.HTTP
     public enum HttpStatusCode
     {
         OK = 200,
-
+        Found = 302
     }
 }

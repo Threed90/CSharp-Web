@@ -15,7 +15,8 @@ namespace HttpServer
             var server = new Server(
                 router =>
                     router.MapGet<HomeController>("/", c => c.Index())
-                        .MapGet<CatController>("/Cat", c => c.Index()));
+                        .MapGet<CatController>("/Cat", c => c.Index())
+                        .MapGet<HomeController>("/SoftUni", c => c.RedirectToSoftUni()));
 
             await server.StartAsync();
         }

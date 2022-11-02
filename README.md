@@ -23,4 +23,5 @@
 - Extending of HttpResponse with request-response func delegate for custom logic implementation of the routing via queryString.
 - Adding controllers;
 - Creating of extend methods for IRoutingMapper to handle controller with func delegate;
+- Creating RedirectResponse and adding BaseController method to use redirections easily.
 

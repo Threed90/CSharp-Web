@@ -16,5 +16,8 @@ namespace HttpServer.Controllers
 
         protected HttpResponse Html(string context)
             => new HtmlResponse(context);
+
+        protected HttpResponse RedirectTo(string location)
+            => new RedirectResponse(location);
     }
 }

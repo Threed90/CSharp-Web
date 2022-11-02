@@ -23,15 +23,16 @@ namespace HttpServer.Routing
             };
         }
 
-        public IRoutingMapper Map(HttpMethods method, string uri, HttpResponse responce)
-         => this.Map(method, uri, request => responce);
-
         public IRoutingMapper Map(HttpMethods method, string uri, Func<HttpRequest, HttpResponse> responce)
         {
-            this.routings[method][uri] = responce;
+            this.routings[method][uri.ToLower()] = responce;
 
             return this;
         }
+
+        public IRoutingMapper Map(HttpMethods method, string uri, HttpResponse responce)
+         => this.Map(method, uri, request => responce);
+
 
         public IRoutingMapper MapGet(string uri, HttpResponse responce)
             => this.MapGet(uri, request => responce);
@@ -46,7 +47,7 @@ namespace HttpServer.Routing
             => this.Map(HttpMethods.POST, uri, func);
 
         public HttpResponse GetResponse(HttpRequest request)
-            => this.routings[request.Method][request.URI](request);
+            => this.routings[request.Method][request.URI.ToLower()](request);
 
     }
 }

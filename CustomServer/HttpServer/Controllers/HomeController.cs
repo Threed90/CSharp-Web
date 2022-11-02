@@ -17,5 +17,8 @@ namespace HttpServer.Controllers
 
         public HttpResponse Index()
             => Html("<h1>Simple page for Custom Server</h1><br><h2>Created by Threed</h2>");
+
+        public HttpResponse RedirectToSoftUni()
+            => RedirectTo("https://softuni.bg/");
     }
 }
